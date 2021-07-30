@@ -16,12 +16,14 @@ class MainActivity : AppCompatActivity() {
          * Contributorのリストを初期化
          */
         fun initContributorList(list: RecyclerView, context: Context) {
-            list.setHasFixedSize(true)
-            list.layoutManager = LinearLayoutManager(context)
-            list.adapter = ContributorsListAdapter(
-                listOf(ContributorsListAdapter.Row("aaaa", "bbbb"),
-                    ContributorsListAdapter.Row("ccc", "ddddddddddddddddddddddddddddddddddd"),
-                    ContributorsListAdapter.Row("eeee", "ffffffffffffffffffff")))
+            list.run {
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(context)
+                adapter = ContributorsListAdapter(
+                    listOf(ContributorsListAdapter.Row("aaaa", "bbbb"),
+                        ContributorsListAdapter.Row("ccc", "ddddddddddddddddddddddddddddddddddd"),
+                        ContributorsListAdapter.Row("eeee", "ffffffffffffffffffff")))
+            }
         }
     }
 
@@ -38,7 +40,8 @@ class MainActivity : AppCompatActivity() {
      * ContributorsList の RecyclerView.Adapter
      */
     class ContributorsListAdapter(private val contributorList: List<Row>) : RecyclerView.Adapter<ContributorsListAdapter.ViewHolder>() {
-        class Row(val login: String, val id: String)
+
+        data class Row(val login: String, val id: String)
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val loginTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_login)
