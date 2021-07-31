@@ -15,7 +15,7 @@
 
         <!-- exported: 外部アプリからこのアクティビティを起動できるか -->
         <activity android:name=".MainActivity"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
