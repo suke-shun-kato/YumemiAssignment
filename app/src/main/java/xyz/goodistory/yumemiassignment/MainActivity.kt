@@ -16,6 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import xyz.goodistory.yumemiassignment.ContributorDetailActivity.Companion.BUNDLE_NAME_LOGIN
 
 
 class MainActivity : AppCompatActivity() {
@@ -108,12 +109,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+            // 行に文字を表示
             viewHolder.loginTextView.text = contributorRowList[position].login
             viewHolder.idTextView.text = contributorRowList[position].id.toString()
 
-
+            // クリックしたらページ飛ぶようにした（暫定） TODO ちゃんとする
             viewHolder.loginTextView.setOnClickListener {
-                val intent = Intent(context, ContributorDetailActivity::class.java)
+                val intent = Intent(context, ContributorDetailActivity::class.java).apply {
+                    putExtra(BUNDLE_NAME_LOGIN, contributorRowList[position].login)
+                }
                 context.startActivity(intent)
             }
         }
