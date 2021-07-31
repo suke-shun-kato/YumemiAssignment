@@ -1,5 +1,6 @@
 package xyz.goodistory.yumemiassignment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,62 +18,58 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
-//    companion object {
-//        /**
-//         * Contributorのリストを初期化
-//         */
-//        fun initContributorList(list: RecyclerView, context: Context) {
-//            list.run {
-//                setHasFixedSize(true)
-//                layoutManager = LinearLayoutManager(context)
-//                adapter = ContributorsListAdapter(
-//                    mutableListOf()
-//                )
-//            }
-//        }
-//    }
+    companion object {
+        fun requestAndShowContributors(adapter: ContributorsListAdapter, context: Context) {
+            val retrofit = Retrofit.Builder()
+                .baseUrl(context.getString(R.string.api_endpoint))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val service = retrofit.create(GitHubService::class.java)
+
+            val response = service.getContributors()
+            response.enqueue(object : Callback<List<GitHubService.Contributor>> {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onResponse(
+                    call: Call<List<GitHubService.Contributor>>,
+                    response: Response<List<GitHubService.Contributor>>
+                ) {
+                    if (!response.isSuccessful) {
+                        return
+                    }
+
+                    val contributors:List<GitHubService.Contributor>? = response.body()
+                    adapter.run {
+                        contributors?.forEach {
+                            addRow(ContributorsListAdapter.ContributorRow(it.login, it.id))
+                        }
+                        notifyDataSetChanged()
+                    }
+
+                }
+
+                override fun onFailure(call: Call<List<GitHubService.Contributor>>, t: Throwable?) {
+                }
+
+            })
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val adapter = ContributorsListAdapter(mutableListOf())
+        // リサイクラービューの設定
+        val listAdapter = ContributorsListAdapter(mutableListOf())
         findViewById<RecyclerView>(R.id.contributor_list).run {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
+            this.adapter = listAdapter
         }
 
 
-        // TODO URL は string へ
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(GitHubService::class.java)
-
-        val response = service.getContributors()
-        response.enqueue(object : Callback<List<GitHubService.Contributor>> {
-            override fun onResponse(
-                call: Call<List<GitHubService.Contributor>>,
-                response: Response<List<GitHubService.Contributor>>
-            ) {
-                if (!response.isSuccessful) {
-                    return
-                }
-
-                val contributors:List<GitHubService.Contributor>? = response.body()
-                contributors?.forEach {
-                    adapter.addRow(ContributorsListAdapter.ContributorRow(it.login, it.id))
-                }
-                adapter.notifyDataSetChanged()
-            }
-
-            override fun onFailure(call: Call<List<GitHubService.Contributor>>, t: Throwable?) {
-            }
-
-        })
+        // APIでコントリビューター情報を取得して表示
+        requestAndShowContributors(listAdapter, this)
     }
 
 
