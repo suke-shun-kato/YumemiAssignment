@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="contributors_list_item_width_weight_login">1</dimen>
+    <dimen name="contributors_list_item_width_weight_id">1</dimen>
+</resources>
