@@ -2,6 +2,7 @@ package xyz.goodistory.yumemiassignment
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -60,12 +61,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // リサイクラービューの設定
-        val listAdapter = ContributorsListAdapter(mutableListOf())
-        findViewById<RecyclerView>(R.id.contributor_list).run {
+        val listAdapter = ContributorsListAdapter(mutableListOf(), this)
+        findViewById<RecyclerView>(R.id.contributor_list).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             this.adapter = listAdapter
         }
+
+
+
 
 
         // APIでコントリビューター情報を取得して表示
@@ -76,8 +80,10 @@ class MainActivity : AppCompatActivity() {
     /**
      * ContributorsList の RecyclerView.Adapter
      */
-    class ContributorsListAdapter(private val contributorRowList: MutableList<ContributorRow>)
-        : RecyclerView.Adapter<ContributorsListAdapter.ViewHolder>() {
+    class ContributorsListAdapter(
+        private val contributorRowList: MutableList<ContributorRow>,
+        private val context: Context
+        ): RecyclerView.Adapter<ContributorsListAdapter.ViewHolder>() {
 
         /**
          * 1行分のデータを保持するクラス
@@ -104,6 +110,12 @@ class MainActivity : AppCompatActivity() {
         override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
             viewHolder.loginTextView.text = contributorRowList[position].login
             viewHolder.idTextView.text = contributorRowList[position].id.toString()
+
+
+            viewHolder.loginTextView.setOnClickListener {
+                val intent = Intent(context, ContributorDetailActivity::class.java)
+                context.startActivity(intent)
+            }
         }
 
         override fun getItemCount() = contributorRowList.size
