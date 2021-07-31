@@ -22,12 +22,7 @@ import xyz.goodistory.yumemiassignment.ContributorDetailActivity.Companion.BUNDL
 class MainActivity : AppCompatActivity() {
     companion object {
         fun requestAndShowContributors(adapter: ContributorsListAdapter, context: Context) {
-            val retrofit = Retrofit.Builder()
-                .baseUrl(context.getString(R.string.api_endpoint))
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            val service = retrofit.create(GitHubService::class.java)
+            val service = Common.getGitHubService(context)
 
             val response = service.getContributors()
             response.enqueue(object : Callback<List<GitHubService.Contributor>> {

@@ -5,15 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ContributorDetailActivity">
-<!-- TODO 暫定-->
+
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/aaaaa"
-        android:layout_width="wrap_content"
+        android:id="@+id/contributor_detail_login"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="aaaaa"
-        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="ianhanniballake"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contributor_detail_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="517315"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contributor_detail_login" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contributor_detail_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="Sunnyvale, CA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contributor_detail_id" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contributor_detail_company"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="google"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contributor_detail_location" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
