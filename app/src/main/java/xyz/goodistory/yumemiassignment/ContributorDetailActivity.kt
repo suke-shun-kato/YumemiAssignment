@@ -2,6 +2,7 @@ package xyz.goodistory.yumemiassignment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.squareup.picasso.Picasso
@@ -10,6 +11,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import xyz.goodistory.yumemiassignment.http.GitHubService
 import xyz.goodistory.yumemiassignment.http.User
+import android.content.Intent
+import android.net.Uri
+
 
 class ContributorDetailActivity : AppCompatActivity() {
     private lateinit var iconImage: AppCompatImageView
@@ -18,6 +22,7 @@ class ContributorDetailActivity : AppCompatActivity() {
     private lateinit var typeTextView: AppCompatTextView
     private lateinit var locationTextView: AppCompatTextView
     private lateinit var companyTextView: AppCompatTextView
+    private lateinit var githubBtton: AppCompatButton
 
 
     companion object {
@@ -37,6 +42,8 @@ class ContributorDetailActivity : AppCompatActivity() {
         typeTextView = findViewById(R.id.contributor_detail_type_text)
         locationTextView = findViewById(R.id.contributor_detail_location_text)
         companyTextView = findViewById(R.id.contributor_detail_company_text)
+        companyTextView = findViewById(R.id.contributor_detail_company_text)
+        githubBtton = findViewById(R.id.contributors_detail_github_button)
 
 
         // ユーザー情報を表示
@@ -76,6 +83,15 @@ class ContributorDetailActivity : AppCompatActivity() {
                 locationTextView.text = user.location
                 typeTextView.text = user.type
                 companyTextView.text = user.company
+
+                // ボタンクリック
+                githubBtton.setOnClickListener {
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse(user.html_url)))
+
+                }
             }
 
             override fun onFailure(call: Call<User>, t: Throwable?) {
