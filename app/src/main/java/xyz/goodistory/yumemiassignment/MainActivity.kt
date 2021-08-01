@@ -8,14 +8,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import xyz.goodistory.yumemiassignment.ContributorDetailActivity.Companion.BUNDLE_NAME_LOGIN
 
 
@@ -64,10 +63,6 @@ class MainActivity : AppCompatActivity() {
             this.adapter = listAdapter
         }
 
-
-
-
-
         // APIでコントリビューター情報を取得して表示
         requestAndShowContributors(listAdapter, this)
     }
@@ -89,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val loginTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_login)
             val idTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_id)
-
+            val detailButton: AppCompatButton = view.findViewById(R.id.contributors_list_item_detail)
         }
 
         fun addRow(row: ContributorRow) {
@@ -108,8 +103,8 @@ class MainActivity : AppCompatActivity() {
             viewHolder.loginTextView.text = contributorRowList[position].login
             viewHolder.idTextView.text = contributorRowList[position].id.toString()
 
-            // クリックしたらページ飛ぶようにした（暫定） TODO ちゃんとする
-            viewHolder.loginTextView.setOnClickListener {
+            // クリックしたらページ飛ぶようにした
+            viewHolder.detailButton.setOnClickListener {
                 val intent = Intent(context, ContributorDetailActivity::class.java).apply {
                     putExtra(BUNDLE_NAME_LOGIN, contributorRowList[position].login)
                 }
