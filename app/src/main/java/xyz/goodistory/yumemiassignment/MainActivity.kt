@@ -78,9 +78,9 @@ class MainActivity : AppCompatActivity() {
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val loginTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_login)
-            val idTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_id)
-            val detailButton: AppCompatButton = view.findViewById(R.id.contributors_list_item_detail)
+            val typeTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_type_text)
             val contributionsTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_contributions_text)
+            val detailButton: AppCompatButton = view.findViewById(R.id.contributors_list_item_detail)
         }
 
         fun addRow(row: Contributor) {
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
             // 行に文字を表示
             viewHolder.loginTextView.text = contributorList[position].login
-            viewHolder.idTextView.text = contributorList[position].id.toString()
+            viewHolder.typeTextView.text = contributorList[position].type
             viewHolder.contributionsTextView.text = contributorList[position].contributions.toString()
 
             // 「詳細」ボタンをクリックしたらページ飛ぶようにした
