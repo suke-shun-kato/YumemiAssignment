@@ -9,9 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -77,6 +79,7 @@ class MainActivity : AppCompatActivity() {
         ): RecyclerView.Adapter<ContributorsListAdapter.ViewHolder>() {
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val iconImage: AppCompatImageView = view.findViewById(R.id.contributors_list_item_icon)
             val loginTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_login)
             val typeTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_type_text)
             val contributionsTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_contributions_text)
@@ -95,6 +98,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+            // アイコンの画像を表示
+            Picasso.get()
+                .load(contributorList[position].avatar_url)
+                // 読み込み完了前までに表示される画像
+                .placeholder(R.drawable.no_image)
+                // エラー時に表示される画像
+                .error(R.drawable.no_image)
+                .into(viewHolder.iconImage);
+
             // 行に文字を表示
             viewHolder.loginTextView.text = contributorList[position].login
             viewHolder.typeTextView.text = contributorList[position].type
