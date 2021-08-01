@@ -39,7 +39,7 @@ class ContributorDetailActivity : AppCompatActivity() {
     }
 
     private fun requestAndShowUser(login: String) {
-        val service = Common.getGitHubService(this)
+        val service = GitHubService.getGitHubService(this)
 
         // リクエスト
         val response = service.getUser(login)

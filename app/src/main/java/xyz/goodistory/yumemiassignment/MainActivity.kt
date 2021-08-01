@@ -8,47 +8,65 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import xyz.goodistory.yumemiassignment.ContributorDetailActivity.Companion.BUNDLE_NAME_LOGIN
 
 
 class MainActivity : AppCompatActivity() {
     companion object {
         fun requestAndShowContributors(adapter: ContributorsListAdapter, context: Context) {
-            val service = Common.getGitHubService(context)
+            val service = GitHubService.getGitHubService(context)
 
             val response = service.getContributors()
-            response.enqueue(object : Callback<List<GitHubService.Contributor>> {
+            response.enqueue(object : Callback<List<Contributor>> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
-                    call: Call<List<GitHubService.Contributor>>,
-                    response: Response<List<GitHubService.Contributor>>
+                    call: Call<List<Contributor>>,
+                    response: Response<List<Contributor>>
                 ) {
                     if (!response.isSuccessful) {
                         return
                     }
 
-                    val contributors:List<GitHubService.Contributor>? = response.body()
+                    val contributors:List<Contributor>? = response.body()
                     adapter.run {
                         contributors?.forEach {
-                            addRow(ContributorsListAdapter.ContributorRow(it.login, it.id))
+                            addRow(it)
                         }
                         notifyDataSetChanged()
                     }
 
                 }
 
-                override fun onFailure(call: Call<List<GitHubService.Contributor>>, t: Throwable?) {
+                override fun onFailure(call: Call<List<Contributor>>, t: Throwable?) {
                 }
 
             })
+        }
+
+        /**
+         * コントリビューターリスト（リサイクラービュー）の設定や初期化
+         */
+        fun initList(listAdapter: ContributorsListAdapter, activity: AppCompatActivity) {
+            activity.findViewById<RecyclerView>(R.id.contributor_list).apply {
+                setHasFixedSize(true)
+
+                // レイアウトの設定
+                layoutManager = LinearLayoutManager(activity)
+                
+                // itemの境目に横線
+                addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+                adapter = listAdapter
+            }
         }
     }
 
@@ -58,15 +76,7 @@ class MainActivity : AppCompatActivity() {
 
         // リサイクラービューの設定
         val listAdapter = ContributorsListAdapter(mutableListOf(), this)
-        findViewById<RecyclerView>(R.id.contributor_list).apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            this.adapter = listAdapter
-        }
-
-
-
-
+        initList(listAdapter, this)
 
         // APIでコントリビューター情報を取得して表示
         requestAndShowContributors(listAdapter, this)
@@ -77,23 +87,20 @@ class MainActivity : AppCompatActivity() {
      * ContributorsList の RecyclerView.Adapter
      */
     class ContributorsListAdapter(
-        private val contributorRowList: MutableList<ContributorRow>,
+        private val contributorList: MutableList<Contributor>,
         private val context: Context
         ): RecyclerView.Adapter<ContributorsListAdapter.ViewHolder>() {
 
-        /**
-         * 1行分のデータを保持するクラス
-         */
-        data class ContributorRow(val login: String, val id: Int)
-
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val iconImage: AppCompatImageView = view.findViewById(R.id.contributors_list_item_icon)
             val loginTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_login)
-            val idTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_id)
-
+            val typeTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_type_text)
+            val contributionsTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_contributions_text)
+            val detailButton: AppCompatButton = view.findViewById(R.id.contributors_list_item_detail)
         }
 
-        fun addRow(row: ContributorRow) {
-            contributorRowList.add(row)
+        fun addRow(row: Contributor) {
+            contributorList.add(row)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -104,20 +111,30 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-            // 行に文字を表示
-            viewHolder.loginTextView.text = contributorRowList[position].login
-            viewHolder.idTextView.text = contributorRowList[position].id.toString()
+            // アイコンの画像を表示
+            Picasso.get()
+                .load(contributorList[position].avatar_url)
+                // 読み込み完了前までに表示される画像
+                .placeholder(R.drawable.no_image)
+                // エラー時に表示される画像
+                .error(R.drawable.no_image)
+                .into(viewHolder.iconImage);
 
-            // クリックしたらページ飛ぶようにした（暫定） TODO ちゃんとする
-            viewHolder.loginTextView.setOnClickListener {
+            // 行に文字を表示
+            viewHolder.loginTextView.text = contributorList[position].login
+            viewHolder.typeTextView.text = contributorList[position].type
+            viewHolder.contributionsTextView.text = contributorList[position].contributions.toString()
+
+            // 「詳細」ボタンをクリックしたらページ飛ぶようにした
+            viewHolder.detailButton.setOnClickListener {
                 val intent = Intent(context, ContributorDetailActivity::class.java).apply {
-                    putExtra(BUNDLE_NAME_LOGIN, contributorRowList[position].login)
+                    putExtra(BUNDLE_NAME_LOGIN, contributorList[position].login)
                 }
                 context.startActivity(intent)
             }
         }
 
-        override fun getItemCount() = contributorRowList.size
+        override fun getItemCount() = contributorList.size
 
     }
 }
