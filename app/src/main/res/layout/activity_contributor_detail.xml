@@ -4,49 +4,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/contributors_detail_padding"
     tools:context=".ContributorDetailActivity">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/contributor_detail_icon"
-        android:layout_width="@dimen/contributors_detail_icon_width_height"
-        android:layout_height="@dimen/contributors_detail_icon_width_height"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contributor_detail_top_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/contributors_detail_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/no_image" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/contributor_detail_login"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="ianhanniballake"
-        app:layout_constraintEnd_toEndOf="parent"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/contributor_detail_icon"
+            android:layout_width="@dimen/contributors_detail_icon_width_height"
+            android:layout_height="@dimen/contributors_detail_icon_width_height"
+            android:layout_marginTop="@dimen/contributors_detail_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/no_image" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/contributor_detail_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/contributors_detail_login_margin_top"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/contributors_detail_login_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contributor_detail_icon"
+            tools:text="ianhanniballake" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="@color/design_default_color_secondary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contributor_detail_icon" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/contributor_detail_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="517315"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contributor_detail_login" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/contributor_detail_location"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="Sunnyvale, CA"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contributor_detail_id" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/contributor_detail_company"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="google"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contributor_detail_location" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_detail_top_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/contributor_detail_location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Sunnyvale, CA" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/contributor_detail_company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="google" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/contributor_detail_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="517315" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

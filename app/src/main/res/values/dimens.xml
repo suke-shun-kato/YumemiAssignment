@@ -8,5 +8,6 @@
 
     <dimen name="contributors_detail_padding">16dp</dimen>
     <dimen name="contributors_detail_icon_width_height">240dp</dimen>
-
+    <dimen name="contributors_detail_login_margin_top">8dp</dimen>
+    <dimen name="contributors_detail_login_text_size">24sp</dimen>
 </resources>
