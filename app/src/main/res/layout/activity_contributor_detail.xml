@@ -6,37 +6,179 @@
     android:layout_height="match_parent"
     tools:context=".ContributorDetailActivity">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/contributor_detail_login"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="ianhanniballake"
+    <!-- 上半分 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contributor_detail_top_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/contributors_detail_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/contributor_detail_id"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="517315"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/contributor_detail_icon"
+            android:layout_width="@dimen/contributors_detail_icon_width_height"
+            android:layout_height="@dimen/contributors_detail_icon_width_height"
+            android:layout_marginTop="@dimen/contributors_detail_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/no_image" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/contributor_detail_login"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/contributors_detail_login_margin_top"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/contributors_detail_login_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contributor_detail_icon"
+            tools:text="ianhanniballake" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 下半分 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="@color/design_default_color_secondary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contributor_detail_login" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/contributor_detail_location"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="Sunnyvale, CA"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contributor_detail_id" />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/contributor_detail_company"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="google"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contributor_detail_location" />
+        app:layout_constraintTop_toBottomOf="@id/contributor_detail_top_container"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <!-- 名前 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingHorizontal="@dimen/contributors_detail_bottom_container_padding_vertical"
+            android:paddingVertical="@dimen/contributors_detail_bottom_container_padding_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contributor_detail_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/contributors_detail_name_label"
+                android:gravity="start|center_vertical"
+                android:textSize="@dimen/contributors_detail_bottom_text_size"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contributor_detail_name_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end|center_vertical"
+                android:textSize="@dimen/contributors_detail_bottom_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/contributor_detail_name_label"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="User" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- タイプ -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingHorizontal="@dimen/contributors_detail_bottom_container_padding_vertical"
+            android:paddingVertical="@dimen/contributors_detail_bottom_container_padding_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contributor_detail_type_label"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/contributors_detail_type_label"
+                android:gravity="start|center_vertical"
+                android:textSize="@dimen/contributors_detail_bottom_text_size"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contributor_detail_type_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end|center_vertical"
+                android:textSize="@dimen/contributors_detail_bottom_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@id/contributor_detail_type_label"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="User" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingHorizontal="@dimen/contributors_detail_bottom_container_padding_vertical"
+            android:paddingVertical="@dimen/contributors_detail_bottom_container_padding_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contributor_detail_location_label"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/contributors_detail_location_label"
+                android:gravity="start|center_vertical"
+                android:textSize="@dimen/contributors_detail_bottom_text_size"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contributor_detail_location_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end|center_vertical"
+                android:textSize="@dimen/contributors_detail_bottom_text_size"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/contributor_detail_location_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Sunnyvale, CA" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingHorizontal="@dimen/contributors_detail_bottom_container_padding_vertical"
+            android:paddingVertical="@dimen/contributors_detail_bottom_container_padding_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contributor_detail_company_label"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:text="@string/contributors_detail_company_label"
+                android:gravity="start|center_vertical"
+                android:textSize="@dimen/contributors_detail_bottom_text_size"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/contributor_detail_company_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="end|center_vertical"
+                android:textSize="@dimen/contributors_detail_bottom_text_size"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/contributor_detail_company_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="google" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/contributors_detail_github_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAllCaps="false"
+            android:text="@string/contributors_detail_github_button"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

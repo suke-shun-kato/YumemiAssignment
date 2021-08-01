@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="contributors_list_item_width_weight_login">1</dimen>
-    <dimen name="contributors_list_item_width_weight_id">1</dimen>
     <dimen name="contributors_list_item_padding">8dp</dimen>
     <dimen name="contributors_list_item_text_size">16sp</dimen>
     <dimen name="contributors_list_item_image_width">60dp</dimen>
     <dimen name="contributors_list_item_text_margin_start">8dp</dimen>
     <dimen name="contributors_list_item_margin_text_label">4sp</dimen>
 
+    <dimen name="contributors_detail_padding">16dp</dimen>
+    <dimen name="contributors_detail_icon_width_height">240dp</dimen>
+    <dimen name="contributors_detail_login_margin_top">8dp</dimen>
+    <dimen name="contributors_detail_login_text_size">24sp</dimen>
+    <dimen name="contributors_detail_bottom_container_padding_vertical">24dp</dimen>
+    <dimen name="contributors_detail_bottom_container_padding_horizontal">8dp</dimen>
+    <dimen name="contributors_detail_bottom_text_size">20sp</dimen>
 </resources>
