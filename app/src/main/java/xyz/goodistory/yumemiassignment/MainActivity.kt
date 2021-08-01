@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -51,6 +52,22 @@ class MainActivity : AppCompatActivity() {
 
             })
         }
+
+        /**
+         * コントリビューターリスト（リサイクラービュー）の設定や初期化
+         */
+        fun initList(listAdapter: ContributorsListAdapter, activity: AppCompatActivity) {
+            activity.findViewById<RecyclerView>(R.id.contributor_list).apply {
+                setHasFixedSize(true)
+
+                // レイアウトの設定
+                layoutManager = LinearLayoutManager(activity)
+                
+                // itemの境目に横線
+                addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+                adapter = listAdapter
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,11 +76,7 @@ class MainActivity : AppCompatActivity() {
 
         // リサイクラービューの設定
         val listAdapter = ContributorsListAdapter(mutableListOf(), this)
-        findViewById<RecyclerView>(R.id.contributor_list).apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            this.adapter = listAdapter
-        }
+        initList(listAdapter, this)
 
         // APIでコントリビューター情報を取得して表示
         requestAndShowContributors(listAdapter, this)
