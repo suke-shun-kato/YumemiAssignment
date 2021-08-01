@@ -2,7 +2,9 @@ package xyz.goodistory.yumemiassignment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -10,6 +12,7 @@ import xyz.goodistory.yumemiassignment.http.GitHubService
 import xyz.goodistory.yumemiassignment.http.User
 
 class ContributorDetailActivity : AppCompatActivity() {
+    private lateinit var iconImage: AppCompatImageView
     private lateinit var loginTextView: AppCompatTextView
     private lateinit var idTextView: AppCompatTextView
     private lateinit var locationTextView: AppCompatTextView
@@ -19,7 +22,6 @@ class ContributorDetailActivity : AppCompatActivity() {
     companion object {
         const val BUNDLE_NAME_LOGIN = "login"
 
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +29,7 @@ class ContributorDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_contributor_detail)
 
         // ビューをセット
+        iconImage = findViewById(R.id.contributor_detail_icon)
         loginTextView = findViewById(R.id.contributor_detail_login)
         idTextView = findViewById(R.id.contributor_detail_id)
         locationTextView = findViewById(R.id.contributor_detail_location)
@@ -56,8 +59,14 @@ class ContributorDetailActivity : AppCompatActivity() {
                     return
                 }
 
-                // ビューにセット
                 val user: User = response.body() ?: return
+
+                // アイコン画像をセット
+                Picasso.get()
+                    .load(user.avatar_url)
+                    .into(iconImage)
+
+                // 文字列をセット
                 loginTextView.text = user.login
                 idTextView.text = user.id.toString()
                 locationTextView.text = user.location
