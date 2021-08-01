@@ -2,4 +2,9 @@
 <resources>
     <dimen name="contributors_list_item_width_weight_login">1</dimen>
     <dimen name="contributors_list_item_width_weight_id">1</dimen>
+    <dimen name="contributors_list_item_padding">8dp</dimen>
+    <dimen name="contributors_list_item_text_size">16sp</dimen>
+    <dimen name="contributors_list_item_image_width">60dp</dimen>
+    <dimen name="contributors_list_item_text_margin_start">8dp</dimen>
+
 </resources>

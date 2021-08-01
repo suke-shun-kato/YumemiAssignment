@@ -1,21 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="@dimen/contributors_list_item_padding">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/contributors_list_item_login"
-        android:layout_width="0dp"
-        android:layout_weight="@dimen/contributors_list_item_width_weight_login"
-        android:layout_height="match_parent"
-        tools:text="ianhanniballake" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/contributors_list_item_icon"
+        android:layout_width="@dimen/contributors_list_item_image_width"
+        android:layout_height="@dimen/contributors_list_item_image_width"
+        android:src="@drawable/no_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/contributors_list_item_id"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="@dimen/contributors_list_item_width_weight_id"
-        android:layout_height="match_parent"
-        tools:text="517315" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginStart="@dimen/contributors_list_item_text_margin_start"
+        android:layout_marginEnd="@dimen/contributors_list_item_text_margin_start"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/contributors_list_item_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/contributors_list_item_detail"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/contributors_list_item_login"
+            android:textSize="@dimen/contributors_list_item_text_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="ianhanniballake"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/contributors_list_item_id"
+            android:textSize="@dimen/contributors_list_item_text_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="517315"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/contributors_list_item_id2"
+            android:textSize="@dimen/contributors_list_item_text_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/contributors_list_item_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/contributors_list_item_detail"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

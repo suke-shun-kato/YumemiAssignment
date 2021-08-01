@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">YumemiAssignment</string>
     <string name="api_endpoint">https://api.github.com/</string>
+    <string name="contributors_list_item_detail">詳細</string>
 </resources>
