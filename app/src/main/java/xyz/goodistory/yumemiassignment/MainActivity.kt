@@ -24,27 +24,27 @@ class MainActivity : AppCompatActivity() {
             val service = Common.getGitHubService(context)
 
             val response = service.getContributors()
-            response.enqueue(object : Callback<List<GitHubService.Contributor>> {
+            response.enqueue(object : Callback<List<Contributor>> {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onResponse(
-                    call: Call<List<GitHubService.Contributor>>,
-                    response: Response<List<GitHubService.Contributor>>
+                    call: Call<List<Contributor>>,
+                    response: Response<List<Contributor>>
                 ) {
                     if (!response.isSuccessful) {
                         return
                     }
 
-                    val contributors:List<GitHubService.Contributor>? = response.body()
+                    val contributors:List<Contributor>? = response.body()
                     adapter.run {
                         contributors?.forEach {
-                            addRow(ContributorsListAdapter.ContributorRow(it.login, it.id))
+                            addRow(it)
                         }
                         notifyDataSetChanged()
                     }
 
                 }
 
-                override fun onFailure(call: Call<List<GitHubService.Contributor>>, t: Throwable?) {
+                override fun onFailure(call: Call<List<Contributor>>, t: Throwable?) {
                 }
 
             })
@@ -72,23 +72,19 @@ class MainActivity : AppCompatActivity() {
      * ContributorsList の RecyclerView.Adapter
      */
     class ContributorsListAdapter(
-        private val contributorRowList: MutableList<ContributorRow>,
+        private val contributorList: MutableList<Contributor>,
         private val context: Context
         ): RecyclerView.Adapter<ContributorsListAdapter.ViewHolder>() {
-
-        /**
-         * 1行分のデータを保持するクラス
-         */
-        data class ContributorRow(val login: String, val id: Int)
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val loginTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_login)
             val idTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_id)
             val detailButton: AppCompatButton = view.findViewById(R.id.contributors_list_item_detail)
+            val contributionsTextView: AppCompatTextView = view.findViewById(R.id.contributors_list_item_contributions_text)
         }
 
-        fun addRow(row: ContributorRow) {
-            contributorRowList.add(row)
+        fun addRow(row: Contributor) {
+            contributorList.add(row)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -100,19 +96,20 @@ class MainActivity : AppCompatActivity() {
 
         override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
             // 行に文字を表示
-            viewHolder.loginTextView.text = contributorRowList[position].login
-            viewHolder.idTextView.text = contributorRowList[position].id.toString()
+            viewHolder.loginTextView.text = contributorList[position].login
+            viewHolder.idTextView.text = contributorList[position].id.toString()
+            viewHolder.contributionsTextView.text = contributorList[position].contributions.toString()
 
-            // クリックしたらページ飛ぶようにした
+            // 「詳細」ボタンをクリックしたらページ飛ぶようにした
             viewHolder.detailButton.setOnClickListener {
                 val intent = Intent(context, ContributorDetailActivity::class.java).apply {
-                    putExtra(BUNDLE_NAME_LOGIN, contributorRowList[position].login)
+                    putExtra(BUNDLE_NAME_LOGIN, contributorList[position].login)
                 }
                 context.startActivity(intent)
             }
         }
 
-        override fun getItemCount() = contributorRowList.size
+        override fun getItemCount() = contributorList.size
 
     }
 }

@@ -17,44 +17,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contributors_list_item_login"
+        android:textSize="@dimen/contributors_list_item_text_size"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:layout_marginStart="@dimen/contributors_list_item_text_margin_start"
         android:layout_marginEnd="@dimen/contributors_list_item_text_margin_start"
-        android:orientation="vertical"
         app:layout_constraintStart_toEndOf="@id/contributors_list_item_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/contributors_list_item_detail"
-        >
+        tools:text="ianhanniballake"
+        />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/contributors_list_item_login"
-            android:textSize="@dimen/contributors_list_item_text_size"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="ianhanniballake"
-            />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contributors_list_item_id"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/contributors_list_item_text_size"
+        android:layout_marginStart="@dimen/contributors_list_item_text_margin_start"
+        android:layout_marginEnd="@dimen/contributors_list_item_text_margin_start"
+        app:layout_constraintStart_toEndOf="@id/contributors_list_item_icon"
+        app:layout_constraintTop_toBottomOf="@id/contributors_list_item_login"
+        app:layout_constraintEnd_toStartOf="@id/contributors_list_item_detail"
+        tools:text="517315" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/contributors_list_item_id"
-            android:textSize="@dimen/contributors_list_item_text_size"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="517315"
-            />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/contributors_list_item_id2"
-            android:textSize="@dimen/contributors_list_item_text_size"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            />
+    <!-- Contribute数-->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contributors_list_item_contributions_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/contributors_list_item_text_size"
+        android:text="@string/contributors_list_item_contributions_label"
+        android:layout_marginStart="@dimen/contributors_list_item_text_margin_start"
+        app:layout_constraintStart_toEndOf="@id/contributors_list_item_icon"
+        app:layout_constraintTop_toBottomOf="@id/contributors_list_item_id"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contributors_list_item_contributions_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/contributors_list_item_text_size"
+        android:layout_marginEnd="@dimen/contributors_list_item_text_margin_start"
+        app:layout_constraintStart_toEndOf="@id/contributors_list_item_contributions_label"
+        app:layout_constraintTop_toTopOf="@id/contributors_list_item_contributions_label"
+        app:layout_constraintEnd_toStartOf="@id/contributors_list_item_detail"
+        app:layout_constraintBottom_toBottomOf="@id/contributors_list_item_contributions_label"
+        tools:text="100" />
 
-    </LinearLayout>
-
+    <!-- 詳細ボタン -->
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/contributors_list_item_detail"
         android:layout_width="wrap_content"
