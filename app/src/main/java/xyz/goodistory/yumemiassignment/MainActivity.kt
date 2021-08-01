@@ -2,6 +2,7 @@ package xyz.goodistory.yumemiassignment
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,17 +16,13 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import xyz.goodistory.yumemiassignment.ContributorDetailActivity.Companion.BUNDLE_NAME_LOGIN
 
 
 class MainActivity : AppCompatActivity() {
     companion object {
         fun requestAndShowContributors(adapter: ContributorsListAdapter, context: Context) {
-            val retrofit = Retrofit.Builder()
-                .baseUrl(context.getString(R.string.api_endpoint))
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            val service = retrofit.create(GitHubService::class.java)
+            val service = Common.getGitHubService(context)
 
             val response = service.getContributors()
             response.enqueue(object : Callback<List<GitHubService.Contributor>> {
@@ -60,12 +57,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // リサイクラービューの設定
-        val listAdapter = ContributorsListAdapter(mutableListOf())
-        findViewById<RecyclerView>(R.id.contributor_list).run {
+        val listAdapter = ContributorsListAdapter(mutableListOf(), this)
+        findViewById<RecyclerView>(R.id.contributor_list).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             this.adapter = listAdapter
         }
+
+
+
 
 
         // APIでコントリビューター情報を取得して表示
@@ -76,8 +76,10 @@ class MainActivity : AppCompatActivity() {
     /**
      * ContributorsList の RecyclerView.Adapter
      */
-    class ContributorsListAdapter(private val contributorRowList: MutableList<ContributorRow>)
-        : RecyclerView.Adapter<ContributorsListAdapter.ViewHolder>() {
+    class ContributorsListAdapter(
+        private val contributorRowList: MutableList<ContributorRow>,
+        private val context: Context
+        ): RecyclerView.Adapter<ContributorsListAdapter.ViewHolder>() {
 
         /**
          * 1行分のデータを保持するクラス
@@ -102,8 +104,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+            // 行に文字を表示
             viewHolder.loginTextView.text = contributorRowList[position].login
             viewHolder.idTextView.text = contributorRowList[position].id.toString()
+
+            // クリックしたらページ飛ぶようにした（暫定） TODO ちゃんとする
+            viewHolder.loginTextView.setOnClickListener {
+                val intent = Intent(context, ContributorDetailActivity::class.java).apply {
+                    putExtra(BUNDLE_NAME_LOGIN, contributorRowList[position].login)
+                }
+                context.startActivity(intent)
+            }
         }
 
         override fun getItemCount() = contributorRowList.size
