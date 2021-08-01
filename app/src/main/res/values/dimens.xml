@@ -6,5 +6,6 @@
     <dimen name="contributors_list_item_text_size">16sp</dimen>
     <dimen name="contributors_list_item_image_width">60dp</dimen>
     <dimen name="contributors_list_item_text_margin_start">8dp</dimen>
+    <dimen name="contributors_list_item_margin_text_label">4sp</dimen>
 
 </resources>
