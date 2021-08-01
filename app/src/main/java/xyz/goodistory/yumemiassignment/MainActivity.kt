@@ -24,7 +24,7 @@ import xyz.goodistory.yumemiassignment.ContributorDetailActivity.Companion.BUNDL
 class MainActivity : AppCompatActivity() {
     companion object {
         fun requestAndShowContributors(adapter: ContributorsListAdapter, context: Context) {
-            val service = Common.getGitHubService(context)
+            val service = GitHubService.getGitHubService(context)
 
             val response = service.getContributors()
             response.enqueue(object : Callback<List<Contributor>> {
