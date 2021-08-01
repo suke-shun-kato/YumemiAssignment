@@ -1,4 +1,4 @@
-package xyz.goodistory.yumemiassignment
+package xyz.goodistory.yumemiassignment.http
 
 data class User(
     val login: String,

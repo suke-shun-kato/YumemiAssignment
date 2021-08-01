@@ -19,6 +19,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import xyz.goodistory.yumemiassignment.ContributorDetailActivity.Companion.BUNDLE_NAME_LOGIN
+import xyz.goodistory.yumemiassignment.http.Contributor
+import xyz.goodistory.yumemiassignment.http.GitHubService
 
 
 class MainActivity : AppCompatActivity() {

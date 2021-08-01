@@ -1,4 +1,4 @@
-package xyz.goodistory.yumemiassignment
+package xyz.goodistory.yumemiassignment.http
 
 import android.content.Context
 import retrofit2.Call
@@ -6,6 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import xyz.goodistory.yumemiassignment.R
 
 interface GitHubService {
     @GET("repos/googlesamples/android-architecture-components/contributors")

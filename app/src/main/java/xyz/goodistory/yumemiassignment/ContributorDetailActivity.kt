@@ -6,6 +6,8 @@ import androidx.appcompat.widget.AppCompatTextView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import xyz.goodistory.yumemiassignment.http.GitHubService
+import xyz.goodistory.yumemiassignment.http.User
 
 class ContributorDetailActivity : AppCompatActivity() {
     private lateinit var loginTextView: AppCompatTextView
