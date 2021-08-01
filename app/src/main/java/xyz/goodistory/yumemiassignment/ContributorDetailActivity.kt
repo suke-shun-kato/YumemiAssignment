@@ -45,24 +45,24 @@ class ContributorDetailActivity : AppCompatActivity() {
         val response = service.getUser(login)
 
         // レスポンスを処理
-        response.enqueue(object : Callback<GitHubService.User> {
+        response.enqueue(object : Callback<User> {
             override fun onResponse(
-                call: Call<GitHubService.User>,
-                response: Response<GitHubService.User>
+                call: Call<User>,
+                response: Response<User>
             ) {
                 if (!response.isSuccessful) {
                     return
                 }
 
                 // ビューにセット
-                val user: GitHubService.User = response.body() ?: return
+                val user: User = response.body() ?: return
                 loginTextView.text = user.login
                 idTextView.text = user.id.toString()
                 locationTextView.text = user.location
                 companyTextView.text = user.company
             }
 
-            override fun onFailure(call: Call<GitHubService.User>, t: Throwable?) {
+            override fun onFailure(call: Call<User>, t: Throwable?) {
             }
 
         })
