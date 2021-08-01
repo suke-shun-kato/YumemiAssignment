@@ -4,4 +4,8 @@
     <string name="contributors_list_item_type_label">タイプ:</string>
     <string name="contributors_list_item_contributions_label">Contribute数:</string>
     <string name="contributors_list_item_detail">詳細</string>
+    <string name="contributors_detail_name_label">名前</string>
+    <string name="contributors_detail_type_label">タイプ</string>
+    <string name="contributors_detail_location_label">場所</string>
+    <string name="contributors_detail_company_label">会社</string>
 </resources>

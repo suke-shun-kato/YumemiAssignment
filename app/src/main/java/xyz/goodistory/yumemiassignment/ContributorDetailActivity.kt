@@ -14,7 +14,8 @@ import xyz.goodistory.yumemiassignment.http.User
 class ContributorDetailActivity : AppCompatActivity() {
     private lateinit var iconImage: AppCompatImageView
     private lateinit var loginTextView: AppCompatTextView
-    private lateinit var idTextView: AppCompatTextView
+    private lateinit var nameTextView: AppCompatTextView
+    private lateinit var typeTextView: AppCompatTextView
     private lateinit var locationTextView: AppCompatTextView
     private lateinit var companyTextView: AppCompatTextView
 
@@ -31,9 +32,11 @@ class ContributorDetailActivity : AppCompatActivity() {
         // ビューをセット
         iconImage = findViewById(R.id.contributor_detail_icon)
         loginTextView = findViewById(R.id.contributor_detail_login)
-        idTextView = findViewById(R.id.contributor_detail_id)
-        locationTextView = findViewById(R.id.contributor_detail_location)
-        companyTextView = findViewById(R.id.contributor_detail_company)
+
+        nameTextView = findViewById(R.id.contributor_detail_name_text)
+        typeTextView = findViewById(R.id.contributor_detail_type_text)
+        locationTextView = findViewById(R.id.contributor_detail_location_text)
+        companyTextView = findViewById(R.id.contributor_detail_company_text)
 
 
         // ユーザー情報を表示
@@ -68,8 +71,10 @@ class ContributorDetailActivity : AppCompatActivity() {
 
                 // 文字列をセット
                 loginTextView.text = user.login
-                idTextView.text = user.id.toString()
+
+                nameTextView.text = user.name
                 locationTextView.text = user.location
+                typeTextView.text = user.type
                 companyTextView.text = user.company
             }
 
