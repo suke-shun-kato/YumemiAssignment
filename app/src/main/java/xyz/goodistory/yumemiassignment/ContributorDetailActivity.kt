@@ -13,6 +13,7 @@ import xyz.goodistory.yumemiassignment.http.GitHubService
 import xyz.goodistory.yumemiassignment.http.User
 import android.content.Intent
 import android.net.Uri
+import xyz.goodistory.yumemiassignment.http.HttpCommon
 
 
 class ContributorDetailActivity : AppCompatActivity() {
@@ -95,6 +96,7 @@ class ContributorDetailActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<User>, t: Throwable?) {
+                HttpCommon.showApiErrorMessage(this@ContributorDetailActivity)
             }
 
         })

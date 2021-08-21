@@ -21,6 +21,7 @@ import retrofit2.Response
 import xyz.goodistory.yumemiassignment.ContributorDetailActivity.Companion.BUNDLE_NAME_LOGIN
 import xyz.goodistory.yumemiassignment.http.Contributor
 import xyz.goodistory.yumemiassignment.http.GitHubService
+import xyz.goodistory.yumemiassignment.http.HttpCommon
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<List<Contributor>>, t: Throwable?) {
+                    HttpCommon.showApiErrorMessage(context)
                 }
 
             })
