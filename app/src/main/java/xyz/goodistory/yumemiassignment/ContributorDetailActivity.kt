@@ -22,7 +22,7 @@ class ContributorDetailActivity : AppCompatActivity() {
     private lateinit var typeTextView: AppCompatTextView
     private lateinit var locationTextView: AppCompatTextView
     private lateinit var companyTextView: AppCompatTextView
-    private lateinit var githubBtton: AppCompatButton
+    private lateinit var githubButton: AppCompatButton
 
 
     companion object {
@@ -43,7 +43,7 @@ class ContributorDetailActivity : AppCompatActivity() {
         locationTextView = findViewById(R.id.contributor_detail_location_text)
         companyTextView = findViewById(R.id.contributor_detail_company_text)
         companyTextView = findViewById(R.id.contributor_detail_company_text)
-        githubBtton = findViewById(R.id.contributors_detail_github_button)
+        githubButton = findViewById(R.id.contributors_detail_github_button)
 
 
         // ユーザー情報を表示
@@ -85,7 +85,7 @@ class ContributorDetailActivity : AppCompatActivity() {
                 companyTextView.text = user.company
 
                 // ボタンクリック
-                githubBtton.setOnClickListener {
+                githubButton.setOnClickListener {
                     startActivity(
                         Intent(
                             Intent.ACTION_VIEW,
