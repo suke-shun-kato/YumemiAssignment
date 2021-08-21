@@ -25,7 +25,7 @@ import xyz.goodistory.yumemiassignment.http.GitHubService
 
 class MainActivity : AppCompatActivity() {
     companion object {
-        fun requestAndShowContributors(adapter: ContributorsListAdapter, context: Context) {
+        private fun requestAndShowContributors(adapter: ContributorsListAdapter, context: Context) {
             val service = GitHubService.getGitHubService(context)
 
             val response = service.getContributors()
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         /**
          * コントリビューターリスト（リサイクラービュー）の設定や初期化
          */
-        fun initList(listAdapter: ContributorsListAdapter, activity: AppCompatActivity) {
+        private fun initList(listAdapter: ContributorsListAdapter, activity: AppCompatActivity) {
             activity.findViewById<RecyclerView>(R.id.contributor_list).apply {
                 setHasFixedSize(true)
 
