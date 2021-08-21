@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                 .placeholder(R.drawable.no_image)
                 // エラー時に表示される画像
                 .error(R.drawable.no_image)
-                .into(viewHolder.iconImage);
+                .into(viewHolder.iconImage)
 
             // 行に文字を表示
             viewHolder.loginTextView.text = contributorList[position].login
